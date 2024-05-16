@@ -55,7 +55,7 @@ public class UserController {
 //				return "login";
 //			}
 			// 「/taskList」へのリダイレクト
-			return "redirect:/taskList";
+			return "redirect:/tasks";
 
 		}
 

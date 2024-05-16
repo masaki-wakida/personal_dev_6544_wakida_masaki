@@ -2,9 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>タスク新規作成</title>
 </head>
 <body>
-
+	<h1>タスク新規作成</h1>
+	<form action="/tasks/add" method="post">
+		<table border="1">
+			<tr>
+				<th>タイトル</th>
+				<td>
+					<input type="text" name="title">
+				</td>
+			</tr>
+			<tr>
+				<th>カテゴリー</th>
+				<td>
+					<input type="number" name="categoryId">
+				</td>
+			</tr>
+			<tr>
+				<th>期限</th>
+				<td>
+					<input type="date" name="limitDate">
+				</td>
+			</tr>
+			<tr>
+				<th>重要度</th>
+				<td>
+					<input type="number" name="importance">
+				</td>
+			</tr>
+			<tr>
+				<th>進捗状況</th>
+				<td>
+					<input type="number" name="progress">
+				</td>
+			</tr>
+			<tr>
+				<th>メモ</th>
+				<td>
+					<input type="text" name="memo">
+				</td>
+			</tr>
+		</table>
+		<button>登録</button>
+	</form>
 </body>
 </html>

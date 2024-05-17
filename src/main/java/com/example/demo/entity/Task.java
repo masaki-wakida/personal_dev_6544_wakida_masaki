@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +24,7 @@ public class Task {
 	private String title; // タイトル
 
 	@Column(name = "limit_date")
-	private Date limitDate; // 期限
+	private LocalDate limitDate; // 期限
 	
 	private Integer progress; // 進捗状況
 	
@@ -33,24 +33,26 @@ public class Task {
 	private String memo;
 
 	//	コンストラクタ
-	public Task(String title, Date limitDate, Integer progress, Integer importance, 
+	public Task(Integer id, String title, Integer categoryId, LocalDate limitDate, Integer progress, Integer importance, 
 			String memo) {
+		this.id = id;
 		this.title = title;
+		this.categoryId = categoryId;
 		this.limitDate = limitDate;
 		this.progress = progress;
 		this.importance = importance;
 		this.memo = memo;
 }
-
-	public Task(Integer categoryId, String title, Date limitDate, Integer importance, Integer progress,
+	
+	public Task(String title, Integer categoryId, LocalDate limitDate, Integer progress, Integer importance, 
 			String memo) {
-		this.categoryId = categoryId;
 		this.title = title;
+		this.categoryId = categoryId;
 		this.limitDate = limitDate;
 		this.progress = progress;
 		this.importance = importance;
 		this.memo = memo;
-	}
+}
 	
 	public Task() {
 	}
@@ -80,11 +82,11 @@ public class Task {
 		this.title = title;
 	}
 
-	public Date getLimitDate() {
+	public LocalDate getLimitDate() {
 		return limitDate;
 	}
 
-	public void setLimitDate(Date limitDate) {
+	public void setLimitDate(LocalDate limitDate) {
 		this.limitDate = limitDate;
 	}
 

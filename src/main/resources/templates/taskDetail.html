@@ -2,9 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>タスク詳細</title>
 </head>
 <body>
-
+    <h1>タスク詳細</h1>
+    <form th:action="@{'/tasks/' + ${task.id} + '/update'}" method="post">
+    <table border="1">
+            <tr>
+                <th>カテゴリー</th>
+                <td>
+                  <input type="radio" id="categoryId" name="categoryId" value="0" th:checked="${task.categoryId == 0}"/>
+                  <input type="radio" id="categoryId" name="categoryId" value="1" th:checked="${task.categoryId == 1}"/>
+                  <input type="radio" id="categoryId" name="categoryId" value="2" th:checked="${task.categoryId == 2}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>タイトル</th>
+                <td>
+                    <input type="text" name="title" th:value="${task.title}">
+                </td>
+            </tr>
+            <tr>
+                <th>期限</th>
+                <td>
+                    <input type="date" name="limitDate" th:value="${task.limitDate}">
+                </td>
+            </tr>
+            <tr>
+                <th>重要度</th>
+                <td>
+                    <input type="radio" id="importance" name="importance" value="0" th:checked="${task.importance == 0}"/>
+                    <input type="radio" id="importance" name="importance" value="1" th:checked="${task.importance == 1}"/>
+                    <input type="radio" id="importance" name="importance" value="2" th:checked="${task.importance == 2}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>進捗状況</th>
+                <td>
+                    <input type="radio" id="progress" name="progress" value="0" th:checked="${task.progress == 0}"/>
+                    <input type="radio" id="progress" name="progress" value="1" th:checked="${task.progress == 1}"/>
+                    <input type="radio" id="progress" name="progress" value="2" th:checked="${task.progress == 2}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>メモ</th>
+                <td>
+                    <input type="text" name="memo" th:value="${task.memo}">
+                </td>
+            </tr>
+        </table>
+        <button>更新</button>
+    </form>
+    
+    <form th:action="@{'/tasks/' + ${task.id} + '/delete'}" method="post">
+		<button>削除</button>
+	</form>
 </body>
 </html>

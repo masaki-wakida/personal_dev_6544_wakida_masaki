@@ -9,15 +9,20 @@
 	<form action="/tasks/add" method="post">
 		<table border="1">
 			<tr>
-				<th>タイトル</th>
+				<th>カテゴリー</th>
 				<td>
-					<input type="text" name="title">
+				  <input type="radio" id="categoryId" name="categoryId" value="0" />
+			
+			      <input type="radio" id="categoryId" name="categoryId" value="1"/>
+			
+			      <input type="radio" id="categoryId" name="categoryId" value="2"/>
+		
 				</td>
 			</tr>
 			<tr>
-				<th>カテゴリー</th>
+				<th>タイトル</th>
 				<td>
-					<input type="number" name="categoryId">
+					<input type="text" name="title">
 				</td>
 			</tr>
 			<tr>
@@ -29,13 +34,21 @@
 			<tr>
 				<th>重要度</th>
 				<td>
-					<input type="number" name="importance">
+					<input type="radio" id="importance" name="importance" value="0"/>
+				
+				    <input type="radio" id="importance" name="importance" value="1"/>
+			
+				    <input type="radio" id="importance" name="importance" value="2"/>
 				</td>
 			</tr>
 			<tr>
 				<th>進捗状況</th>
 				<td>
-					<input type="number" name="progress">
+					<input type="radio" id="progress" name="progress" value="0"/>
+				
+				    <input type="radio" id="progress" name="progress" value="1"/>
+			
+				    <input type="radio" id="progress" name="progress" value="2"/>
 				</td>
 			</tr>
 			<tr>

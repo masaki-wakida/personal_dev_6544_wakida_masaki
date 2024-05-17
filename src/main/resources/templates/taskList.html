@@ -5,26 +5,28 @@
 <title>タスク一覧</title>
 </head>
 <body>
-	<a th:each="category:${categories}" th:href="@{/????(categoryId=${category.id})}" th:text="${category.name}"></a>
+    <a th:each="category: ${categories}" th:href="@{/task(categoryId=${category.id})}" th:text="${category.name}"></a>
 
-	<table border="1">
-		<tr>
-			<th>タイトル</th>
-			<th>カテゴリー</th>
-			<th>期限</th>
-			<th>重要度</th>
-			<th>進捗状況</th>
-		</tr>
-<!--		th:each="箱を定義:${コントローラーから持ってきたリスト}"-->
-		<tr th:each="task:${tasks}">
-			<td th:text="${task.categoryId}"></td>
-			<td th:text="${task.title}"></td>
-			<td th:text="${task.limitDate}"></td>
-			<td th:text="${task.progress}"></td>
-			<td th:text="${task.importance}"></td>
-		</tr>
-	</table>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>タイトル</th>
+            <th>カテゴリー</th>
+            <th>期限</th>
+            <th>重要度</th>
+            <th>進捗状況</th>
+        </tr>
+        <!-- th:each="task : ${tasks}" -->
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+            <td><a th:href="@{'/tasks/' + ${task.id} + '/detail'}" th:text="${task.title}"></a></td>
+            <td th:text="${task.categoryId}"></td>
+            <td th:text="${task.limitDate}"></td>
+            <td th:text="${task.progress}"></td>
+            <td th:text="${task.importance}"></td>
+        </tr>
+    </table>
 
-	<a href="/tasks/add">新規登録</a>
+    <a href="/tasks/add">新規登録</a>
 </body>
 </html>

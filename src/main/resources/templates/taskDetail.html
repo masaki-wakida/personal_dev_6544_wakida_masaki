@@ -6,14 +6,18 @@
 </head>
 <body>
     <h1>タスク詳細</h1>
+    
+    <span th:text="${@account.name}+' さんがログイン中'"></span>
+    <a href="/logout">ログアウト</a><br>
+    
     <form th:action="@{'/tasks/' + ${task.id} + '/update'}" method="post">
     <table border="1">
             <tr>
                 <th>カテゴリー</th>
                 <td>
-                  <input type="radio" id="categoryId" name="categoryId" value="0" th:checked="${task.categoryId == 0}"/>
-                  <input type="radio" id="categoryId" name="categoryId" value="1" th:checked="${task.categoryId == 1}"/>
-                  <input type="radio" id="categoryId" name="categoryId" value="2" th:checked="${task.categoryId == 2}"/>
+                  <input type="radio" id="categoryId" name="categoryId" value="1" th:checked="${task.categoryId == 1}"/>仕事
+                  <input type="radio" id="categoryId" name="categoryId" value="2" th:checked="${task.categoryId == 2}"/>個人
+                  <input type="radio" id="categoryId" name="categoryId" value="3" th:checked="${task.categoryId == 3}"/>その他
                 </td>
             </tr>
             <tr>
@@ -31,17 +35,17 @@
             <tr>
                 <th>重要度</th>
                 <td>
-                    <input type="radio" id="importance" name="importance" value="0" th:checked="${task.importance == 0}"/>
-                    <input type="radio" id="importance" name="importance" value="1" th:checked="${task.importance == 1}"/>
-                    <input type="radio" id="importance" name="importance" value="2" th:checked="${task.importance == 2}"/>
+                    <input type="radio" id="importance" name="importance" value="0" th:checked="${task.importance == 0}"/>高
+                    <input type="radio" id="importance" name="importance" value="1" th:checked="${task.importance == 1}"/>中
+                    <input type="radio" id="importance" name="importance" value="2" th:checked="${task.importance == 2}"/>低
                 </td>
             </tr>
             <tr>
                 <th>進捗状況</th>
                 <td>
-                    <input type="radio" id="progress" name="progress" value="0" th:checked="${task.progress == 0}"/>
-                    <input type="radio" id="progress" name="progress" value="1" th:checked="${task.progress == 1}"/>
-                    <input type="radio" id="progress" name="progress" value="2" th:checked="${task.progress == 2}"/>
+                    <input type="radio" id="progress" name="progress" value="0" th:checked="${task.progress == 0}"/>未着手
+                    <input type="radio" id="progress" name="progress" value="1" th:checked="${task.progress == 1}"/>進行中
+                    <input type="radio" id="progress" name="progress" value="2" th:checked="${task.progress == 2}"/>完了
                 </td>
             </tr>
             <tr>

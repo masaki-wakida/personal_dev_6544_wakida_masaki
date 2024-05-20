@@ -3,9 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>タスク一覧</title>
+
 </head>
 <body>
-    <a th:each="category: ${categories}" th:href="@{/task(categoryId=${category.id})}" th:text="${category.name}"></a>
+	<h1>タスク詳細</h1>
+	 
+	<span th:text="${@account.name}+' さんがログイン中'"></span>
+	<a href="/logout">ログアウト</a><br>
+	 
+    <a href="/tasks">全カテゴリー</a>
+	<a th:each="c:${categories}" th:href="'/tasks?categoryId='+${c.id}">
+		<span th:text="${c.name}" style="padding-left: 10px;"></span>
+	</a>
+    
+     <form th:action="@{/tasks}" method="get">
+		<input type="text" name="keyword" placeholder="タスクタイトル" th:value="${keyword}">
+		<button>検索</button>
+	</form>
 
     <table border="1">
         <tr>
@@ -16,14 +30,15 @@
             <th>重要度</th>
             <th>進捗状況</th>
         </tr>
-        <!-- th:each="task : ${tasks}" -->
+
         <tr th:each="task : ${tasks}">
             <td th:text="${task.id}"></td>
             <td><a th:href="@{'/tasks/' + ${task.id} + '/detail'}" th:text="${task.title}"></a></td>
-            <td th:text="${task.categoryId}"></td>
+            <td th:each="cmap : ${categoryMap}" th:if="${cmap.key} == ${task.categoryId}" th:text="${cmap.value}"></td>
             <td th:text="${task.limitDate}"></td>
-            <td th:text="${task.progress}"></td>
-            <td th:text="${task.importance}"></td>
+            <td th:each="imap : ${importanceMap}" th:if="${imap.key} == ${task.importance}" th:text="${imap.value}"></td>
+            <td th:each="pmap : ${progressMap}" th:if="${pmap.key} == ${task.progress}" th:text="${pmap.value}"></td>
+
         </tr>
     </table>
 

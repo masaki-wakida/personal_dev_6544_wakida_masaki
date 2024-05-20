@@ -20,6 +20,9 @@ public class Task {
 
 	@Column(name = "category_id")
 	private Integer categoryId; // カテゴリーID
+	
+	@Column(name = "user_id")
+	private Integer userId; // ユーザID
 
 	private String title; // タイトル
 
@@ -32,32 +35,34 @@ public class Task {
 	
 	private String memo;
 
-	//	コンストラクタ
-	public Task(Integer id, String title, Integer categoryId, LocalDate limitDate, Integer progress, Integer importance, 
-			String memo) {
+	public Task(Integer id, Integer categoryId, Integer userId, String title, LocalDate limitDate, Integer progress,
+			Integer importance, String memo) {
+		super();
 		this.id = id;
-		this.title = title;
 		this.categoryId = categoryId;
+		this.userId = userId;
+		this.title = title;
 		this.limitDate = limitDate;
 		this.progress = progress;
 		this.importance = importance;
 		this.memo = memo;
-}
-	
-	public Task(String title, Integer categoryId, LocalDate limitDate, Integer progress, Integer importance, 
-			String memo) {
-		this.title = title;
-		this.categoryId = categoryId;
-		this.limitDate = limitDate;
-		this.progress = progress;
-		this.importance = importance;
-		this.memo = memo;
-}
-	
-	public Task() {
 	}
 
-	//	ゲッターとセッター
+	public Task(Integer categoryId, String title, LocalDate limitDate, Integer progress,
+			Integer importance, String memo) {
+		super();
+		this.categoryId = categoryId;
+		this.title = title;
+		this.limitDate = limitDate;
+		this.progress = progress;
+		this.importance = importance;
+		this.memo = memo;
+	}
+
+	public Task() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -72,6 +77,14 @@ public class Task {
 
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getTitle() {
@@ -105,13 +118,16 @@ public class Task {
 	public void setImportance(Integer importance) {
 		this.importance = importance;
 	}
+
 	public String getMemo() {
 		return memo;
 	}
 
 	public void setMemo(String memo) {
 		this.memo = memo;
-	}	
+	}
+
+	
 
 	
 }

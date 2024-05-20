@@ -6,16 +6,24 @@
 </head>
 <body>
 	<h1>タスク新規作成</h1>
+	
+	<span th:text="${@account.name}+' さんがログイン中'"></span>
+	<a href="/logout">ログアウト</a><br>
+	
+	<ul th:if="${errorList}" class="error">
+		<li th:each="error:${errorList}" th:text="${error}"></li>
+	</ul>
+	
 	<form action="/tasks/add" method="post">
 		<table border="1">
 			<tr>
 				<th>カテゴリー</th>
 				<td>
-				  <input type="radio" id="categoryId" name="categoryId" value="0" />
+				  <input type="radio" id="categoryId" name="categoryId" value="0" />仕事
 			
-			      <input type="radio" id="categoryId" name="categoryId" value="1"/>
+			      <input type="radio" id="categoryId" name="categoryId" value="1"/>個人
 			
-			      <input type="radio" id="categoryId" name="categoryId" value="2"/>
+			      <input type="radio" id="categoryId" name="categoryId" value="2"/>その他
 		
 				</td>
 			</tr>
@@ -34,21 +42,21 @@
 			<tr>
 				<th>重要度</th>
 				<td>
-					<input type="radio" id="importance" name="importance" value="0"/>
-				
-				    <input type="radio" id="importance" name="importance" value="1"/>
+					<input type="radio" id="importance" name="importance" value="1"/>高
 			
-				    <input type="radio" id="importance" name="importance" value="2"/>
+				    <input type="radio" id="importance" name="importance" value="2"/>中
+			
+				    <input type="radio" id="importance" name="importance" value="3"/>低
 				</td>
 			</tr>
 			<tr>
 				<th>進捗状況</th>
 				<td>
-					<input type="radio" id="progress" name="progress" value="0"/>
+					<input type="radio" id="progress" name="progress" value="0"/>未着手
 				
-				    <input type="radio" id="progress" name="progress" value="1"/>
+				    <input type="radio" id="progress" name="progress" value="1"/>進行中
 			
-				    <input type="radio" id="progress" name="progress" value="2"/>
+				    <input type="radio" id="progress" name="progress" value="2"/>完了
 				</td>
 			</tr>
 			<tr>

@@ -16,4 +16,26 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	
 	List<Task> findByUserId(Integer userId);
 	
+//	ソート機能
+	List<Task> findByUserIdOrderByIdDesc(Integer userId);
+
+	List<Task> findByUserIdOrderByTitleAsc(Integer userId);
+
+	List<Task> findByUserIdOrderByTitleDesc(Integer userId);
+
+	List<Task> findByUserIdOrderByCategoryIdAsc(Integer userId);
+
+	List<Task> findByUserIdOrderByCategoryIdDesc(Integer userId);
+
+	List<Task> findByUserIdOrderByImportanceAsc(Integer userId);
+
+	List<Task> findByUserIdOrderByImportanceDesc(Integer userId);
+
+	List<Task> findByUserIdOrderByProgressAsc(Integer userId);
+
+	List<Task> findByUserIdOrderByProgressDesc(Integer userId);
+
+	List<Task> findByUserIdOrderByLimitDateAsc(Integer userId);
+
+	List<Task> findByUserIdOrderByLimitDateDesc(Integer userId);
 }

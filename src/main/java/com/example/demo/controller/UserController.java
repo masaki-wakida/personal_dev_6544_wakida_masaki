@@ -42,6 +42,7 @@ public class UserController {
 		@RequestParam(name = "email", defaultValue = "") String email,
 		@RequestParam(name = "name", defaultValue = "") String name,
 		@RequestParam(name = "password", defaultValue = "") String password,
+		@RequestParam(name = "password_confirm", defaultValue = "") String password_confirm,
 		Model model) {
 		
 		// エラーチェック
@@ -54,6 +55,9 @@ public class UserController {
 		}
 		if (password.length() == 0) {
 			errorList.add("パスワードは必須です");
+		}
+		if (!(password.equals(password_confirm))) {
+			errorList.add("パスワードが一致しません");
 		}
 		// メールアドレス存在チェック
 		List<User> userrList = userRepository.findByEmail(email);

@@ -38,8 +38,6 @@ public class TaskController {
 		@RequestParam(value = "categoryId", defaultValue = "") Integer categoryId,
 		@RequestParam(name = "keyword", defaultValue = "") String keyword,
 		Model model) {
-
-	Integer userId = account.getId();	
 	
 //	 categoryテーブルから全カテゴリー一覧を取得
 	List<Category> categoryList = categoryRepository.findAll();
@@ -67,12 +65,18 @@ public class TaskController {
 	
 	model.addAttribute("progressMap",progressMap);
 	
+//	userIdの取得
+	Integer userId = account.getId();	
+	
 // 	商品一覧情報の取得
 	List<Task> taskList = null;
 	if (categoryId != null) {
 		taskList = taskRepository.findByUserIdAndCategoryId(userId, categoryId);
 		
-	}else if (keyword.length() > 0){
+
+	} else if (keyword.length() > 0) {
+		// 商品名による部分一致検索
+//		SELECT * FROM items WHERE name LIKE 
 		taskList = taskRepository.findByUserIdAndTitleContaining(userId, keyword);
 		
 	} else {
@@ -90,7 +94,7 @@ public class TaskController {
 	public String create() {
 		return "taskAdd";
 	}
-	
+//	タスク新規登録
 	@PostMapping({"/tasks/add"}) 
 	public String add(
 		@RequestParam(value = "categoryId", defaultValue = "") Integer categoryId,
@@ -100,6 +104,9 @@ public class TaskController {
 		@RequestParam(value = "progress", defaultValue = "") Integer progress,
 		@RequestParam(value = "memo", defaultValue = "") String memo,
 		Model model) {
+		
+//	userIdの取得
+	Integer userId_taskAdd = account.getId();	
 	
 	// エラーチェック
 	List<String> taskErrorList = new ArrayList<>();
@@ -125,7 +132,7 @@ public class TaskController {
 	}
 		
 	// taskオブジェクトの生成
-	Task task = new Task(categoryId, title, limitDate, importance, progress, memo);
+	Task task = new Task(categoryId, userId_taskAdd, title, limitDate, importance, progress, memo);
 	// tasksテーブルへの反映（INSERT）
 	taskRepository.save(task);
 	// 「/tasks」にGETでリクエストし直す（リダイレクト）
@@ -146,7 +153,6 @@ public class TaskController {
 	public String update(
 		@PathVariable("id") Integer id,
 		@RequestParam(value = "categoryId", defaultValue = "") Integer categoryId,
-		@PathVariable("userId") Integer userId,
 		@RequestParam(value = "title", defaultValue = "") String title,
 		@RequestParam(value = "limitDate", defaultValue = "") LocalDate limitDate,
 		@RequestParam(value = "importance", defaultValue = "") Integer importance,
@@ -154,8 +160,11 @@ public class TaskController {
 		@RequestParam(value = "memo", defaultValue = "") String memo,
 		Model model) {
 
+//		userIdの取得
+		Integer userId_taskUpdate = account.getId();	
+		
 		// taskオブジェクトの生成
-		Task task = new Task(id, categoryId, userId, title, limitDate, importance, progress, memo);
+		Task task = new Task(id, categoryId, userId_taskUpdate, title, limitDate, importance, progress, memo);
 		// tasksテーブルへの反映（UPDATE）
 		taskRepository.save(task);
 		// 「/tasks」にGETでリクエストし直す（リダイレクト）
@@ -170,6 +179,54 @@ public class TaskController {
 		// 「/tasks」にGETでリクエストし直す（リダイレクト）
 		return "redirect:/tasks";
 
+	}
+	
+	@GetMapping("/tasks/{sort}")
+	public String sort(
+			@PathVariable("sort") String sort,
+			Model model) {
+
+//		userIdの取得
+		Integer userId_taskAdd = account.getId();	
+		
+		List<Task> Task = null;
+		switch (sort) {
+		case "title":
+			Task = taskRepository.findByUserIdOrderByTitleAsc(userId);
+			break;
+		case "eltit":
+			Task = taskRepository.findByUserIdOrderByTitleDesc(userId);
+			break;
+		case "cat":
+			Task = taskRepository.findByUserIdOrderByCategoryIdAsc(userId);
+			break;
+		case "tac":
+			Task = taskRepository.findByUserIdOrderByCategoryIdDesc(userId);
+			break;
+		case "imp":
+			Task = taskRepository.findByUserIdOrderByImportanceAsc(userId);
+			break;
+		case "pmi":
+			Task = taskRepository.findByUserIdOrderByImportanceDesc(userId);
+			break;
+		case "prog":
+			Task = taskRepository.findByUserIdOrderByProgressAsc(userId);
+			break;
+		case "gorp":
+			Task = taskRepository.findByUserIdOrderByProgressDesc(userId);
+			break;
+		case "lim":
+			Task = taskRepository.findByUserIdOrderByLimitDateAsc(userId);
+			break;
+		case "mil":
+			Task = taskRepository.findByUserIdOrderByLimitDateDesc(userId);
+			break;
+		}
+		model.addAttribute("task", Task);
+		model.addAttribute("cm", cm);
+		model.addAttribute("im", im);
+		model.addAttribute("pm", pm);
+		return "taskList";
 	}
 }
 

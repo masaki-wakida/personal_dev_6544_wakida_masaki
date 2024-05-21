@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>タスク一覧</title>
-
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	<h1>タスク詳細</h1>
@@ -21,7 +21,8 @@
 		<button>検索</button>
 	</form>
 
-    <table border="1">
+	<h2 th:if="${tasks.size() == 0 }">タスクがありません</h2>
+    <table border="1" th:if="${tasks.size() > 0 }" >
         <tr>
             <th>ID</th>
             <th>タイトル</th>
@@ -45,3 +46,4 @@
     <a href="/tasks/add">新規登録</a>
 </body>
 </html>
+

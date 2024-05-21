@@ -48,10 +48,11 @@ public class Task {
 		this.memo = memo;
 	}
 
-	public Task(Integer categoryId, String title, LocalDate limitDate, Integer progress,
+	public Task(Integer categoryId, Integer userId, String title, LocalDate limitDate, Integer progress,
 			Integer importance, String memo) {
 		super();
 		this.categoryId = categoryId;
+		this.userId = userId;
 		this.title = title;
 		this.limitDate = limitDate;
 		this.progress = progress;

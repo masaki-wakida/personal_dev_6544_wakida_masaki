@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>タスク詳細</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <h1>タスク詳細</h1>
@@ -10,7 +11,7 @@
     <span th:text="${@account.name}+' さんがログイン中'"></span>
     <a href="/logout">ログアウト</a><br>
     
-    <form th:action="@{'/tasks/' + ${task.id} + '/update'}" method="post">
+    <form th:action="@{'/tasks/' + ${task.id} + '/update'}" method="post" onsubmit="return updateBtn()">
     <table border="1">
             <tr>
                 <th>カテゴリー</th>
@@ -55,11 +56,32 @@
                 </td>
             </tr>
         </table>
-        <button>更新</button>
+        <button type="submit">更新</button>
     </form>
     
-    <form th:action="@{'/tasks/' + ${task.id} + '/delete'}" method="post">
-		<button>削除</button>
+    <form th:action="@{'/tasks/' + ${task.id} + '/update'}" method="post" onsubmit="return deleteBtn()">
+		<button type="submit">削除</button>
 	</form>
 </body>
 </html>
+
+
+<script type="text/javascript">
+  function updateBtn(){
+    if(window.confirm('更新しますか？')) {
+      return true; // 「OK」なら更新
+    }
+    else {
+      return false; // 「キャンセル」なら更新しない
+    }
+  }
+  
+    function deleteBtn(){
+    if(window.confirm('削除しますか？')) {
+      return true; // 「OK」なら削除
+    }
+    else {
+      return false; // 「キャンセル」なら削除しない
+    }
+  }
+</script>

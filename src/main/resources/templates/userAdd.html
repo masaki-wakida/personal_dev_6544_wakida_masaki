@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ユーザ新規作成</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	<h1>ユーザ新規作成</h1>
 	<form action="/users/add" method="post">
 		
 		<ul th:if="${errorList}" class="error">
-			<li th:each="error:${errorList}" th:text="${error}"></li>
+			<li th:each="error:${errorList}" th:text="${error}" style="color: red"></li>
 		</ul>
 		
 		<table border="1">

@@ -17,33 +17,70 @@
 	</a>
     
      <form th:action="@{/tasks}" method="get">
-		<input type="text" name="keyword" placeholder="タスクタイトル" th:value="${keyword}">
+		<input type="text" name="keyword" placeholder="タスクタイトル" th:value="${keyword}" maxlength="50">
 		<button>検索</button>
 	</form>
 
-	<h2 th:if="${tasks.size() == 0 }">タスクがありません</h2>
-    <table border="1" th:if="${tasks.size() > 0 }" >
-        <tr>
-            <th>ID</th>
-            <th>タイトル</th>
-            <th>カテゴリー</th>
-            <th>期限</th>
-            <th>重要度</th>
-            <th>進捗状況</th>
-        </tr>
+	<h2 th:if="${tasks.size() == 0 }">タスクがありません</h2> 
+    <table border="1" id="sortTable" th:if="${tasks.size() > 0 }" >
+   
+    	<th>タイトル</th>
+		<th>カテゴリー</th>
+		<th>期限
+			<form action="/tasks">
+				<input type="submit" value="" class="ascBtn">
+				<input type="hidden" name="sort" value="lim" >
+			</form>
+			<form action="/tasks">
+				<input type="submit" value="" class="descBtn">
+				<input type="hidden" name="sort" value="mil" >
+			</form>
+		</th>
+		<th>重要度
+			<form action="/tasks">
+				<input type="submit" value="" class="ascBtn">
+				<input type="hidden" name="sort" value="imp" >
+			</form>
+			<form action="/tasks">
+				<input type="submit" value="" class="descBtn">
+				<input type="hidden" name="sort" value="pmi" >
+			</form>
+			
+		</th>
+		<th>進捗状況
+			<form action="/tasks">
+				<input type="submit" value="" class="ascBtn">
+				<input type="hidden" name="sort" value="prog" >
+			</form>
+			<form action="/tasks">
+				<input type="submit" value="" class="descBtn">
+				<input type="hidden" name="sort" value="gorp" >
+			</form>
+		</th>
 
         <tr th:each="task : ${tasks}">
-            <td th:text="${task.id}"></td>
             <td><a th:href="@{'/tasks/' + ${task.id} + '/detail'}" th:text="${task.title}"></a></td>
             <td th:each="cmap : ${categoryMap}" th:if="${cmap.key} == ${task.categoryId}" th:text="${cmap.value}"></td>
             <td th:text="${task.limitDate}"></td>
             <td th:each="imap : ${importanceMap}" th:if="${imap.key} == ${task.importance}" th:text="${imap.value}"></td>
             <td th:each="pmap : ${progressMap}" th:if="${pmap.key} == ${task.progress}" th:text="${pmap.value}"></td>
-
         </tr>
     </table>
-
     <a href="/tasks/add">新規登録</a>
 </body>
 </html>
+
+<script>
+ const today = new Date();
+ function dateFormat(today, format){
+    format = format.replace("YYYY", today.getFullYear());
+    format = format.replace("MM", ("0"+(today.getMonth() + 1)).slice(-2));
+    format = format.replace("DD", ("0"+ today.getDate()).slice(-2));
+    return format;
+ }
+ const data = dateFormat(today,'YYYY-MM-DD');
+ const field = document.getElementById(dateに付与した任意ID);
+ field.value = data;
+ field.setAttribute("min", data);
+</script>
 

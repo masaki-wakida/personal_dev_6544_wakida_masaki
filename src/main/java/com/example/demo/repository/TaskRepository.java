@@ -38,4 +38,5 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	List<Task> findByUserIdOrderByLimitDateAsc(Integer userId);
 
 	List<Task> findByUserIdOrderByLimitDateDesc(Integer userId);
+
 }

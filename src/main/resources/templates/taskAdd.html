@@ -31,7 +31,7 @@
 			<tr>
 				<th>タイトル</th>
 				<td>
-					<input type="text" name="title">
+					<input type="text" name="title" required pattern=".*[^\s]+.*" maxlength="50">
 				</td>
 			</tr>
 			<tr>
@@ -63,11 +63,11 @@
 			<tr>
 				<th>メモ</th>
 				<td>
-					<input type="text" name="memo">
+					<input type="text" name="memo" maxlength="1000">
 				</td>
 			</tr>
 		</table>
 		<button>登録</button>
 	</form>
 </body>
-</html>
+</html>;

@@ -45,6 +45,17 @@ table th {
 	background: #7d8bae;
 	color: #ffffff;
 }
+
+/*昇順ボタン*/
+ascBtn {
+	clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/*降順ボタン*/
+descBtn {
+	clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
 /* 送信ボタン */
 button {
 	margin: 2px;
@@ -59,3 +70,4 @@ button {
 button:hover {
 	background-color: #f1b2b2;
 }
+

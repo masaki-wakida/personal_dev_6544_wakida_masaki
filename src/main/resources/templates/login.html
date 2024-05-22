@@ -11,8 +11,8 @@
 	</header>
 	<main>
 		<form action="/login" method="post">
-			<input type="text" name="email" placeholder="メールアドレス"><br>
-			<input type="text" name="password" placeholder="パスワード"><br>
+			<input type="email" name="email" placeholder="メールアドレス" required maxlength="50"><br>
+			<input type="password" name="password" placeholder="パスワード" pattern="^[a-zA-Z0-9]+$" maxlength="20"><br>
 			<button>ログイン</button>
 			<br> <span th:text="${message}" style="color: red"></span>
 		</form>

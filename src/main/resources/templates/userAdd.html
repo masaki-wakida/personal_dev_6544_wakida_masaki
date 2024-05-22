@@ -17,25 +17,25 @@
 			<tr>
 				<th>ニックネーム(20文字以内)</th>
 				<td>
-					<input type="text" name="name">
+					<input type="text" name="name" required pattern=".*[^\s]+.*" maxlength="20">
 				</td>
 			</tr>
 			<tr>
 				<th>メールアドレス</th>
 				<td>
-					<input type="text" name="email">
+					<input type="email" name="email" required pattern=".*[^\s]+.*" maxlength="50">
 				</td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
 				<td>
-					<input type="text" name="password">
+					<input type="text" name="password"  pattern="^[a-zA-Z0-9]+$" maxlength="20">
 				</td>
 			</tr>
 			<tr>
 				<th>パスワード(確認)</th>
 				<td>
-					<input type="text" name="password_confirm">
+					<input type="text" name="password_confirm" pattern="^[a-zA-Z0-9]+$" maxlength="20">
 				</td>
 			</tr>
 		</table>

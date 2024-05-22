@@ -60,13 +60,10 @@ public class UserController {
 			errorList.add("パスワードが一致しません");
 		}
 		// メールアドレス存在チェック
-		List<User> userrList = userRepository.findByEmail(email);
-		if (userrList != null && userrList.size() > 0) {
+		List<User> userList = userRepository.findByEmail(email);
+		if (userList != null && userList.size() > 0) {
 			// 登録済みのメールアドレスが存在した場合
 			errorList.add("登録済みのメールアドレスです");
-		}
-		if (password.length() == 0) {
-			errorList.add("パスワードは必須です");
 		}
 
 		// エラー発生時はお問い合わせフォームに戻す

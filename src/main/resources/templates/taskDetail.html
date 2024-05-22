@@ -11,6 +11,10 @@
     <span th:text="${@account.name}+' さんがログイン中'"></span>
     <a href="/logout">ログアウト</a><br>
     
+    <ul th:if="${errorList}" class="error">
+		<li th:each="error:${errorList}" th:text="${error}" style="color: red"></li>
+	</ul>
+    
     <form th:action="@{'/tasks/' + ${task.id} + '/update'}" method="post" onsubmit="return updateBtn()">
     <table border="1">
             <tr>
@@ -24,7 +28,7 @@
             <tr>
                 <th>タイトル</th>
                 <td>
-                    <input type="text" name="title" th:value="${task.title}">
+                    <input type="text" name="title" th:value="${task.title}" required pattern=".*[^\s]+.*" maxlength="50">
                 </td>
             </tr>
             <tr>
@@ -52,7 +56,7 @@
             <tr>
                 <th>メモ</th>
                 <td>
-                    <input type="text" name="memo" th:value="${task.memo}">
+                    <input type="text" name="memo" th:value="${task.memo}" maxlength="1000">
                 </td>
             </tr>
         </table>

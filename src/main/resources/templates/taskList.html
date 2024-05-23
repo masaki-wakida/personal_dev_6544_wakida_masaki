@@ -4,60 +4,75 @@
 <meta charset="UTF-8">
 <title>タスク一覧</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
-	<h1>タスク詳細</h1>
+<body class="d-flex align-items-center py-5 bg-body-tertiary">
 	 
-	<span th:text="${@account.name}+' さんがログイン中'"></span>
-	<a href="/logout">ログアウト</a><br>
-	 
-    <a href="/tasks">全カテゴリー</a>
-	<a th:each="c:${categories}" th:href="'/tasks?categoryId='+${c.id}">
-		<span th:text="${c.name}" style="padding-left: 10px;"></span>
-	</a>
-    
-     <form th:action="@{/tasks}" method="get">
-		<input type="text" name="keyword" placeholder="タスクタイトル" th:value="${keyword}" maxlength="50">
-		<button>検索</button>
-	</form>
 
+<header class="w-100 p-3 m-auto" style="background-color: #eee;">
+  <div class="container-fluid">
+    <a href="/tasks/add" class="navbar-brand">新規登録</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		<a href="/tasks">全カテゴリー</a>
+			<a th:each="c:${categories}" th:href="'/tasks?categoryId='+${c.id}">
+			<span th:text="${c.name}" style="padding-left: 10px;"></span>
+		</a>
+      </ul>
+      <form th:action="@{/tasks}" method="get" class="d-flex" role="search">
+        <input class="form-control me-2" type="search" name="keyword" placeholder="タスクタイトル" aria-label="検索" th:value="${keyword}" maxlength="50">
+        <button class="btn btn-outline-success" type="submit">検索</button>
+      </form>
+    </div>
+  </div>
+</header>	 
+
+<main style="background-color: #eee;"> 
 	<h2 th:if="${tasks.size() == 0 }">タスクがありません</h2> 
-    <table border="1" id="sortTable" th:if="${tasks.size() > 0 }" >
-   
-    	<th>タイトル</th>
-		<th>カテゴリー</th>
-		<th>期限
-			<form action="/tasks">
-				<input type="submit" value="" class="ascBtn">
-				<input type="hidden" name="sort" value="lim" >
-			</form>
-			<form action="/tasks">
-				<input type="submit" value="" class="descBtn">
-				<input type="hidden" name="sort" value="mil" >
-			</form>
-		</th>
-		<th>重要度
-			<form action="/tasks">
-				<input type="submit" value="" class="ascBtn">
-				<input type="hidden" name="sort" value="imp" >
-			</form>
-			<form action="/tasks">
-				<input type="submit" value="" class="descBtn">
-				<input type="hidden" name="sort" value="pmi" >
-			</form>
-			
-		</th>
-		<th>進捗状況
-			<form action="/tasks">
-				<input type="submit" value="" class="ascBtn">
-				<input type="hidden" name="sort" value="prog" >
-			</form>
-			<form action="/tasks">
-				<input type="submit" value="" class="descBtn">
-				<input type="hidden" name="sort" value="gorp" >
-			</form>
-		</th>
 
+    <div class="w-100 p-75">
+        <table class="table table-hover" style="height: 100px;" id="sortTable" th:if="${tasks.size() > 0 }">
+            <thead>
+                <tr>
+                    <th>タイトル</th>
+                    <th>カテゴリー</th>
+			         <th>期限
+						<form action="/tasks">
+							<input type="submit" class="ascBtn">
+							<input type="hidden" name="sort" value="lim" >
+						</form>
+						<form action="/tasks">
+							<input type="submit" class="descBtn">
+							<input type="hidden" name="sort" value="mil" >
+						</form>
+					</th>
+					<th>重要度
+						<form action="/tasks">
+							<input type="submit" class="ascBtn">
+							<input type="hidden" name="sort" value="imp" >
+						</form>
+						<form action="/tasks">
+							<input type="submit" class="descBtn">
+							<input type="hidden" name="sort" value="pmi" >
+						</form>
+						
+					</th>
+					<th>進捗状況
+						<form action="/tasks">
+							<input type="submit" value="" class="ascBtn">
+							<input type="hidden" name="sort" value="prog" >
+						</form>
+						<form action="/tasks">
+							<input type="submit" value="" class="descBtn">
+							<input type="hidden" name="sort" value="gorp" >
+						</form>
+					</th>
+                </tr>
+            </thead>
+            <tbody>
         <tr th:each="task : ${tasks}">
             <td><a th:href="@{'/tasks/' + ${task.id} + '/detail'}" th:text="${task.title}"></a></td>
             <td th:each="cmap : ${categoryMap}" th:if="${cmap.key} == ${task.categoryId}" th:text="${cmap.value}"></td>
@@ -65,22 +80,18 @@
             <td th:each="imap : ${importanceMap}" th:if="${imap.key} == ${task.importance}" th:text="${imap.value}"></td>
             <td th:each="pmap : ${progressMap}" th:if="${pmap.key} == ${task.progress}" th:text="${pmap.value}"></td>
         </tr>
-    </table>
-    <a href="/tasks/add">新規登録</a>
+            </tbody>
+        </table>
+           
+    </div>
+</main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
 
-<script>
- const today = new Date();
- function dateFormat(today, format){
-    format = format.replace("YYYY", today.getFullYear());
-    format = format.replace("MM", ("0"+(today.getMonth() + 1)).slice(-2));
-    format = format.replace("DD", ("0"+ today.getDate()).slice(-2));
-    return format;
- }
- const data = dateFormat(today,'YYYY-MM-DD');
- const field = document.getElementById(dateに付与した任意ID);
- field.value = data;
- field.setAttribute("min", data);
-</script>
+
 

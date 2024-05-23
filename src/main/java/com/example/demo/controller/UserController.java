@@ -47,21 +47,12 @@ public class UserController {
 		
 		// エラーチェック
 		List<String> errorList = new ArrayList<>();
-		if (email.length() == 0) {
-			errorList.add("メールアドレスは必須です");
-		}
-		if (name.length() == 0) {
-			errorList.add("ニックネームは必須です");
-		}
-		if (password.length() == 0) {
-			errorList.add("パスワードは必須です");
-		}
 		if (!(password.equals(password_confirm))) {
 			errorList.add("パスワードが一致しません");
 		}
 		// メールアドレス存在チェック
 		List<User> userList = userRepository.findByEmail(email);
-		if (userList != null && userList.size() > 0) {
+		if (userList != null && userList.size() > 0 && errorList.size() == 0) {
 			// 登録済みのメールアドレスが存在した場合
 			errorList.add("登録済みのメールアドレスです");
 		}

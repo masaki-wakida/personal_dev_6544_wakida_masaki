@@ -3,71 +3,102 @@ body {
 	background-color: #EFF0F7; /* 背景色  */
 	text-align: center; /* 中央寄せ */
     min-width: 900px; /* 最小幅 */
+    
+}
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+ 
+ 
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
 }
 /* ヘッダー、ナビゲーションメニュー、フッター */
-header, nav, footer {
-	background-color: #45496a; /* 背景色 */
-	color: #ffffff; /* 文字色 */
-	padding-top: 5px; /* 内側余白(上) */
-	padding-bottom: 5px; /* 内側余白(下) */
-}
+/*header, nav, footer {*/
+/*	background-color: #45496a;  背景色 */
+/*	color: #ffffff;  文字色 */
+/*	padding-top: 5px;  内側余白(上) */
+/*	padding-bottom: 5px;  内側余白(下) */
+/*}*/
 /* ヘッダー、ナビゲーション内リンク */
-header a, nav a {
-	color: #ffffff;
-}
+/*header a, nav a {*/
+/*	color: #ffffff;*/
+/*}*/
 /* ヘッダー内見出し */
-header h1 {
-	font-size: 20pt;
-	margin: 10px auto;
-}
+/*header h1 {*/
+/*	font-size: 20pt;*/
+/*	margin: 10px auto;*/
+/*}*/
+
 /* 仕切り線 */
-hr {
-	border-top: 2px dashed #7d8bae;
-}
+/*hr {*/
+/*	border-top: 2px dashed #7d8bae;*/
+/*}*/
 /* メイン */
-main {
-	background-color: #FFFFFF;
-	min-height: 50px;
-	padding: 20px;
-}
+/*main {*/
+/*	background-color: #FFFFFF;*/
+/*	min-height: 50px;*/
+/*	padding: 20px;*/
+/*}*/
 /* 表線 */
-table, th, td {
-	border-collapse: collapse;
-	border: 1px solid #7d8bae;
-}
+/*table, th, td {*/
+/*	border-collapse: collapse;*/
+/*	border: 1px solid #7d8bae;*/
+/*}*/
 /* 表 */
-table {
-    margin: 5px auto;
-    min-width: 800px;
-}
+/*table {*/
+/*    margin: 5px auto;*/
+/*    min-width: 800px;*/
+/*}*/
 /* 表見出しセル */
-table th {
-	background: #7d8bae;
-	color: #ffffff;
-}
-
-/*昇順ボタン*/
-ascBtn {
-	clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-/*降順ボタン*/
-descBtn {
-	clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-
+/*table th {*/
+/*	background: #7d8bae;*/
+/*	color: #ffffff;*/
+/*}*/
 /* 送信ボタン */
-button {
-	margin: 2px;
-	padding: 5px 20px;
-	background-color: #e5857b;
-	color: #ffffff;
-	border: none;
-	width:150px;
-	cursor: pointer;
-}
+/*button {*/
+/*	margin: 2px;*/
+/*	padding: 5px 20px;*/
+/*	background-color: #e5857b;*/
+/*	color: #ffffff;*/
+/*	border: none;*/
+/*	width:150px;*/
+/*	cursor: pointer;*/
+/*}*/
 /* 送信ボタン(マウスオーバー時) */
-button:hover {
-	background-color: #f1b2b2;
-}
+/*button:hover {*/
+/*	background-color: #f1b2b2;*/
+/*}*/
+/* エラーメッセージ */
+/*ul.error {*/
+/*	color: red;*/
+/*	list-style: none;*/
+/*	padding-left: 0;*/
+/*}*/
 

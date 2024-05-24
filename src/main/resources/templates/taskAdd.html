@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>タスク新規作成</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body class="d-flex align-items-center py-5 bg-body-tertiary">
 
-    
-    <ul th:if="${errorList}" class="error">
-		<li th:each="error:${errorList}" th:text="${error}" style="color: red"></li>
+<head>
+	<meta charset="UTF-8">
+	<title>タスク新規作成</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="align-items-center py-5 bg-body-tertiary">
+<nav class="navbar navbar-default navbar-fixed-top">
+ 	<div class="container">
+		<h1>TODOリスト</h1>
+    	<div class="navbar-header text-right">
+			<span  th:text="${@account.name}+' さんがログイン中'"></span>
+			<a href="/logout">ログアウト</a>
+		</div>
+	</div>
+</nav>
+	<ul th:if="${errorList}" class="error">
+		<li th:each="error:${errorList}" th:text="${error}" style="color: red">
 	</ul>
-	
 	<form class="mx-auto" action="/tasks/add" method="post">
 		<div class="row w-75 p-3 m-auto" style="background-color: #eee;">
-	  			<div class="mb-3 text-center">
-	    			<label class="form-label">カテゴリー</label>
-                  	<input type="radio" id="categoryId" name="categoryId" value="1" />仕事
-                  	<input type="radio" id="categoryId" name="categoryId" value="2" />個人
-                  	<input type="radio" id="categoryId" name="categoryId" value="3" />その他
-	  			</div>
-
-				<div class="mb-3 text-center">
-		    		<label class="form-label">タイトル</label>
-                    <input type="text" name="title" required pattern=".*[^\s]+.*" maxlength="50">
-		 		</div>
-		  
-		  		<div class="mb-3 text-center">
-					<label class="form-label">期限</label>
-                    <input type="date" name="limitDate">
-		  		</div>
-		  
-		  		<div class="mb-3 text-center">
-				    <label class="form-label">重要度</label>
-                    <input type="radio" id="importance" name="importance" value="0" />高
-                    <input type="radio" id="importance" name="importance" value="1" />中
-                    <input type="radio" id="importance" name="importance" value="2" />低
-				</div>
-				
-				<div class="mb-3 text-center">
-					<label class="form-label">進捗状況</label>
-                    <input type="radio" id="progress" name="progress" value="0" />未着手
-                    <input type="radio" id="progress" name="progress" value="1" />進行中
-                    <input type="radio" id="progress" name="progress" value="2" />完了
-				</div>
-				
-				<div class="mb-3 text-center">
-				    <label class="form-label">メモ</label>
-                    <input type="text" name="memo" maxlength="1000">	
-				</div>
-		<button class="btn btn-primary">登録</button>
+			<div class="mb-3 text-center">
+				<label class="form-label">カテゴリー</label>
+				<input type="radio" id="categoryId" name="categoryId" value="1">仕事
+				<input type="radio" id="categoryId" name="categoryId" value="2">個人
+				<input type="radio" id="categoryId" name="categoryId" value="3">その他</div>
+			<div class="mb-3 text-center">
+				<label class="form-label">タイトル</label>
+				<input type="text" name="title" required pattern=".*[^\s]+.*" maxlength="50">
+			</div>
+			<div class="mb-3 text-center">
+				<label class="form-label">期限</label>
+				<input type="date" name="limitDate">
+			</div>
+			<div class="mb-3 text-center">
+				<label class="form-label">重要度</label>
+				<input type="radio" id="importance" name="importance" value="0">高
+				<input type="radio" id="importance" name="importance" value="1">中
+				<input type="radio" id="importance" name="importance" value="2">低</div>
+			<div class="mb-3 text-center">
+				<label class="form-label">進捗状況</label>
+				<input type="radio" id="progress" name="progress" value="0">未着手
+				<input type="radio" id="progress" name="progress" value="1">進行中
+				<input type="radio" id="progress" name="progress" value="2">完了</div>
+			<div class="mb-3 text-center">
+				<label class="form-label">メモ</label>
+				<input type="text" name="memo" maxlength="1000">
+			</div>
+			<div class="text-center">
+				<button class="btn btn-primary w-50 py-2 mt-4 mb-3" type="submit">登録</button>
+			</div>
+		</div>
 	</form>
 </body>
+
 </html>

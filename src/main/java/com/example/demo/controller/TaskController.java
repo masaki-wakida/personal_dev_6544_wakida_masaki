@@ -74,7 +74,6 @@ public class TaskController {
 		if (categoryId != null) {
 			taskList = taskRepository.findByUserIdAndCategoryId(userId, categoryId);
 
-
 		} else if (keyword.length() > 0) {
 			// 商品名による部分一致検索
 			//		SELECT * FROM items WHERE name LIKE 
@@ -118,8 +117,19 @@ public class TaskController {
 			taskList = taskRepository.findByUserIdOrderByLimitDateDesc(userId);
 			break;
 		}
-				
+		
+	
+		
+//		タスクの期限が二日前かつ完了済みでない場合をListに登録
+		List<Task> limitTask = new ArrayList<>();
+
+		for(Task task : taskList)
+			if(task.getLimitDate().isBefore(LocalDate.now().plusDays(2)) && task.getProgress() != 2){
+				limitTask.add(task);
+			}
+		
 		model.addAttribute("tasks", taskList);
+		model.addAttribute("limitTask", limitTask);		
 		model.addAttribute("keyword", keyword);
 
 		return "taskList";
@@ -164,6 +174,7 @@ public class TaskController {
 			model.addAttribute("errorList", taskAddErrorList);
 			return "taskAdd";
 		}
+	
 
 		// taskオブジェクトの生成
 		Task task = new Task(categoryId, userId_taskAdd, title, limitDate, importance, progress, memo);
@@ -176,7 +187,6 @@ public class TaskController {
 	@GetMapping({"/tasks/{id}/detail"}) 
 	public String detail (@PathVariable("id") String id, Model model) {
 
-		
 		Task taskList;
 
 		try {	
@@ -253,7 +263,6 @@ public class TaskController {
 		if (progress == null) {
 			taskUpdateErrorList.add("進捗状況を入力してください");
 		}
-
 
 		// エラー発生時はフォームに戻す
 		if (taskUpdateErrorList.size() > 0) {

@@ -39,6 +39,15 @@ body {
   border-top-right-radius: 0;
 
 }
+/*検索ボタン*/
+.btn {
+    min-width: 70px;
+ }
+
+/*.colorclass {*/
+/*	color :red;*/
+/*}*/
+
 /* ヘッダー、ナビゲーションメニュー、フッター */
 /*header, nav, footer {*/
 /*	background-color: #45496a;  背景色 */

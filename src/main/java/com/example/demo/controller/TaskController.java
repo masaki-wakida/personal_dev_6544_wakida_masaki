@@ -267,7 +267,7 @@ public class TaskController {
 		// エラー発生時はフォームに戻す
 		if (taskUpdateErrorList.size() > 0) {
 			model.addAttribute("errorList", taskUpdateErrorList);
-			return "taskAdd";
+			return "taskDetail";
 		}
 
 		// taskオブジェクトの生成

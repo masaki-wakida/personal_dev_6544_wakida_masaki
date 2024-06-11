@@ -124,7 +124,7 @@ public class TaskController {
 		List<Task> limitTask = new ArrayList<>();
 
 		for(Task task : taskList)
-			if(task.getLimitDate().isBefore(LocalDate.now().plusDays(2)) && task.getProgress() != 2){
+			if(task.getLimitDate().isBefore(LocalDate.now().plusDays(3)) && task.getProgress() != 2){
 				limitTask.add(task);
 			}
 		
